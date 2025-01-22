@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.List;
 
 @Service
 public class BookingServiceImpl implements BookingService {
@@ -22,9 +24,11 @@ public class BookingServiceImpl implements BookingService {
     @Autowired
     private RestTemplate restTemplate;
 
-    private static final String DATASOURCE_URL = "http://3.236.19.94:8081/bookings";
-    private static final String FLIGHT_URL = "http://3.236.19.94:8081/flights/";
-    private static final String USER_DATASOURCE_URL ="http://3.236.19.94:8081/users/";
+    private static final String DATASOURCE_URL = "http://3.86.195.31:8081/bookings";
+    private static final String FLIGHT_URL = "http://3.86.195.31:8081/flights/";
+    private static final String USER_DATASOURCE_URL ="http://3.86.195.31:8081/users/";
+
+    //3.236.19.94:8081
 
     @Override
     public Booking createBooking(Long userId, Long flightId) {
@@ -74,12 +78,14 @@ public class BookingServiceImpl implements BookingService {
         return restTemplate.getForObject(getBookingUrl, Booking.class);
     }
 
-//    @Override
-//    public List<Booking> getBookingsByUserId(Long userId) {
-//        // Get bookings by user ID
-//        String  getBookingbyUserId = DATASOURCE_URL + "/user/" + userId;
-//        return restTemplate.getForObject(getBookingbyUserId, List.class);
-//    }
+    @Override
+    public List<Booking> getBookingsByUserId(Long userId) {
+        // Get bookings by user ID
+        String  getBookingbyUserId = DATASOURCE_URL + "/user/" + userId;
+        Booking[] bookings= restTemplate.getForObject(getBookingbyUserId, Booking[].class);
+        return Arrays.asList(bookings);
+
+    }
 
     @Override
     public void cancelBooking(Long bookingId) {

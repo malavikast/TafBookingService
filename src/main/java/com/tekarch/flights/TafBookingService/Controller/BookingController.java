@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/bookings")
 public class BookingController {
@@ -39,15 +41,15 @@ public class BookingController {
 
 
     // Endpoint to get all bookings for a specific user
-//    @GetMapping("/user/{userId}")
-//    public ResponseEntity<List<Booking>> getBookingsByUserId(@PathVariable Long userId) {
-//        List<Booking> bookings = bookingService.getBookingsByUserId(userId);
-//        if (bookings != null && !bookings.isEmpty()) {
-//            return new ResponseEntity<>(bookings, HttpStatus.OK);
-//        } else {
-//            return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
-//        }
-//    }
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<Booking>> getBookingsByUserId(@PathVariable Long userId) {
+        List<Booking> bookings = bookingService.getBookingsByUserId(userId);
+        if (bookings != null && !bookings.isEmpty()) {
+            return new ResponseEntity<>(bookings, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
+        }
+    }
 
     // Endpoint to cancel a booking (mark as "Cancelled")
     @DeleteMapping("/{bookingId}")

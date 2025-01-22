@@ -2,6 +2,8 @@ package com.tekarch.flights.TafBookingService.Service.Interface;
 
 import com.tekarch.flights.TafBookingService.Model.Booking;
 
+import java.util.List;
+
 public interface BookingService {
 
     // Method to create a new booking
@@ -12,7 +14,7 @@ public interface BookingService {
     Booking getBookingById(Long bookingId);
 
     // Method to retrieve all bookings for a specific user by user ID
-    //List<Booking> getBookingsByUserId(Long userId);
+    List<Booking> getBookingsByUserId(Long userId);
 
     // Method to cancel a booking by changing its status to "Cancelled"
     void cancelBooking(Long bookingId);
